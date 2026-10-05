@@ -1,0 +1,20 @@
+{
+	"$schema": "../../docs/modding/schemas/mod.schema.json",
+	"id": "pax_corptimizer",
+	"name": {
+		"en": "Pax Corptimizer",
+		"ru": "Pax Corptimizer"
+	},
+	"version": "2.5.2",
+	"api": 1,
+	"game_version": ">=0.9.0",
+	"authors": ["Babichev Maxim"],
+	"description": {
+		"en": "Makes the game smoother from real measurements: map layer redraws adapt to their measured cost, no 3D behind the open map, an FPS limit, a time-skip screen that pauses the map so the CPU computes the world, map layers to hide armies and bases, and a built-in frame analysis (where every millisecond of a frame goes).",
+		"ru": "Делает игру плавнее по реальным замерам: перерисовка слоёв карты подстраивается под свою стоимость, нет 3D под открытой картой, предел FPS, заставка при перемотке (карта на паузе — процессор считает мир), слои карты, чтобы скрыть армии и базы, и встроенный анализ кадра (куда уходит каждая миллисекунда)."
+	},
+	"tags": ["ui", "performance"],
+	"depends": [],
+	"load_after": ["pax_interface", "pax_qol", "country_menu", "pax_corporations"],
+	"entry": "main.gd"
+}
