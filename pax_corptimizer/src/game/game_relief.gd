@@ -22,8 +22,6 @@ extends Node
 ## Off (setting «relief»): everything back as the game had it.
 
 const GameApi := preload("res://mods/pax_corptimizer/src/shared/game_api.gd")
-const VEHICLES := "res://src/ui/Vehicles3D.gd"
-const ORBITAL := "res://src/space/OrbitalBody.gd"
 const SCAN_S := 2.0
 
 var app: Node
@@ -185,8 +183,9 @@ func _find_movers(root: Object) -> void:
 
 func _collect(n: Node, into: Array, depth: int) -> void:
 	for ch in n.get_children():
-		var s: Variant = ch.get_script()
-		if s is Script and ((s as Script).resource_path == VEHICLES or (s as Script).resource_path == ORBITAL):
+		# The game's machines and stations known by their own fields (Vehicles3D: «_lights» and «_clock»; OrbitalBody:
+		# «_rings» and «_clock»), not by their scripts' paths: the game's guard blocks a whole mod that names its scripts.
+		if ch is Node3D and "_clock" in ch and ("_lights" in ch or "_rings" in ch):
 			into.append(ch)
 		elif depth < 2 and ch.get_child_count() > 0 and ch.get_child_count() < 400:
 			_collect(ch, into, depth + 1)

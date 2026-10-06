@@ -277,5 +277,7 @@
 	"pax_corptimizer_whatsnew_2_5_2_title": "the game itself made lighter",
 	"pax_corptimizer_whatsnew_2_5_2": "• New in ⚙ — «Game relief»: the mod went through the code of Pax Universe 0.24 and lightens the game's own work — the holdings map repaints less often (once at the end of a time skip), machines and stations on unseen bodies stop animating, sounds and map icons update less often, the settings file is no longer read from the disk on every step.\n• The map settings work again in 0.24: the game renamed the map's fields, and the slower layer redraws, hiding bases and the layer checkboxes silently did nothing.",
 	"pax_corptimizer_whatsnew_2_7_1_title": "the game's textures left alone",
-	"pax_corptimizer_whatsnew_2_7_1": "• «Detail by distance» is off by default: the mod no longer coarsens the game's textures (it blurred the clouds and the sea). It can be switched on in ⚙."
+	"pax_corptimizer_whatsnew_2_7_1": "• «Detail by distance» is off by default: the mod no longer coarsens the game's textures (it blurred the clouds and the sea). It can be switched on in ⚙.",
+	"pax_corptimizer_whatsnew_2_7_2_title": "the mod works again",
+	"pax_corptimizer_whatsnew_2_7_2": "• Fixed: since 2.5.0 the game did not load Corptimizer (its guard forbids mods to name the game's scripts, and «Game relief» named them). The mod loads again and all its settings work."
 }
