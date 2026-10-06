@@ -50,6 +50,12 @@ func _mod_loaded() -> void:
 	app.profiler.cover = app.cover
 	app.add_child(app.profiler)
 	app._load_layers()
+	app.lod = Host.Lod.new()
+	app.lod.set_mode(str(app.get_setting("lod2", "off")))
+	app.add_child(app.lod)
+	app.icons_lod = Host.IconsLod.new()
+	app.icons_lod.enabled = bool(app.get_setting("icons_lod", true))
+	app.add_child(app.icons_lod)
 	Pax.register_command("opt_analyze", func(_args: PackedStringArray) -> String:
 		if Pax.game == null:
 			return app.tr_key("pax_corptimizer_no_world")
@@ -74,6 +80,10 @@ func _mod_unloaded() -> void:
 	if app.relief != null:
 		app.relief.restore()
 	app.timeline.detach()
+	if app.lod != null:
+		app.lod.restore()
+	if app.icons_lod != null:
+		app.icons_lod.restore()
 	if not app.upscale_snap.is_empty():
 		Host.Upscale.restore(app.get_tree().root, app.upscale_snap)
 	if app.whatsnew != null:

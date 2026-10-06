@@ -1,4 +1,10 @@
 {
+	"pax_corptimizer_whatsnew_2_7_0_title": "two branches together",
+	"pax_corptimizer_whatsnew_2_7_0": "• Everything in one version: «Game relief» (2.5.2) and «Detail» and «Company marks by distance» (2.6).",
+	"pax_corptimizer_whatsnew_2_6_1_title": "gentler detail by distance",
+	"pax_corptimizer_whatsnew_2_6_1": "• «Detail by distance» is gentler: far textures are coarser by half a step (it was one or two — the clouds and the sea's relief vanished), the models are no longer touched — Pax CorpInc3D's buildings go to light models and blocks by themselves.",
+	"pax_corptimizer_whatsnew_2_6_0_title": "detail and marks by distance",
+	"pax_corptimizer_whatsnew_2_6_0": "• «Detail by distance» (⚙ Optimisation, «normal» by default): the farther the camera from the planet, the coarser the textures and models — less work for the video card; at the ground everything as in the game. «Strong» and «off» too.\n• «Company marks by distance» (on): from afar Pax Corporations draws only the largest companies (about 150 on a far map, more closer, all close in), the chosen company always shows; while the map moves the marks are redrawn less often. The marks' processor load drops several times.\n• Under the switches — what is done now: the distance, the textures' shift, the models' threshold, how many marks of how many.",
 	"pax_corptimizer_whatsnew_2_5_1_title": "no enterprises window",
 	"pax_corptimizer_whatsnew_2_5_1": "• The «Enterprises» window is removed: it stood empty. The enterprises' switches stay for other mods.",
 	"pax_corptimizer_ent_button": "Enterprises",
@@ -253,6 +259,14 @@
 	"pax_corptimizer_aa_taa": "TAA",
 	"pax_corptimizer_whatsnew_2_2_0_title": "upscaling: FSR and MetalFX",
 	"pax_corptimizer_whatsnew_2_2_0": "• The «Optimization» window has upscaling: the 3D world is drawn at a lower resolution and scaled up. AMD FSR 1.0, AMD FSR 2.2 (Forward+ renderer), MetalFX on Mac; quality from native to 50 %, sharpness, FXAA / SMAA / TAA. The interface stays sharp.\n• DLSS and XeSS are listed but off: the Godot engine does not have them, only the game itself can add them.",
+	"pax_corptimizer_lod": "Detail by distance",
+	"pax_corptimizer_lod_tip": "The farther the camera from the planet, the coarser the textures (smaller mip levels) — from afar the detail is not seen, and the video card reads less. At the ground — as in the game. The models are simplified by Pax CorpInc3D itself (buildings → blocks).",
+	"pax_corptimizer_lod_off": "off",
+	"pax_corptimizer_lod_normal": "normal",
+	"pax_corptimizer_lod_strong": "strong",
+	"pax_corptimizer_icons_lod": "Company marks by distance",
+	"pax_corptimizer_icons_lod_tip": "From afar Pax Corporations gets only the largest companies (closer — more, close in — all); while the map moves, the marks are redrawn less often. Less load on the processor.",
+	"pax_corptimizer_lod_now": "Now: distance %d%%, textures +%.1f mip, models ×%.1f; marks %d of %d",
 	"pax_corptimizer_threads": "Multithreading: the mods' heavy work on other cores",
 	"pax_corptimizer_threads_tip": "The companies' economy and statuses (Pax Corporations), the cities' houses, the roads and networks, the Earth's big maps (Pax CorpInc3D) are computed on background threads — the game does not freeze. Switch it off only if you suspect the threads of crashes: then all of it runs on the main thread, with pauses.",
 	"pax_corptimizer_threads_info": "Processor cores: %d, for background work: %d. On threads: the corporations' economy and statuses, the 3D cities, the 3D roads and networks, the NASA maps. The game's own computations cannot be moved by a mod — that would mean changing the game's scripts.",
@@ -261,5 +275,7 @@
 	"pax_corptimizer_relief": "Game relief (its own work)",
 	"pax_corptimizer_relief_tip": "Found in the code of game 0.24: the map of holdings repainted on every change of a province's owner is gathered and repainted at most once in 0.75–3 s (once at the end during a time skip); machines and stations on unseen bodies stop animating; the planet's sounds and status line update twice a second instead of 4 times; vehicle icons on the map every 2 s; caravan routes no longer keep redrawing the map while the trade layer is off; the «historical course» setting is no longer read from the disk on every step of a skip. Off — everything as the game has it.",
 	"pax_corptimizer_whatsnew_2_5_2_title": "the game itself made lighter",
-	"pax_corptimizer_whatsnew_2_5_2": "• New in ⚙ — «Game relief»: the mod went through the code of Pax Universe 0.24 and lightens the game's own work — the holdings map repaints less often (once at the end of a time skip), machines and stations on unseen bodies stop animating, sounds and map icons update less often, the settings file is no longer read from the disk on every step.\n• The map settings work again in 0.24: the game renamed the map's fields, and the slower layer redraws, hiding bases and the layer checkboxes silently did nothing."
+	"pax_corptimizer_whatsnew_2_5_2": "• New in ⚙ — «Game relief»: the mod went through the code of Pax Universe 0.24 and lightens the game's own work — the holdings map repaints less often (once at the end of a time skip), machines and stations on unseen bodies stop animating, sounds and map icons update less often, the settings file is no longer read from the disk on every step.\n• The map settings work again in 0.24: the game renamed the map's fields, and the slower layer redraws, hiding bases and the layer checkboxes silently did nothing.",
+	"pax_corptimizer_whatsnew_2_7_1_title": "the game's textures left alone",
+	"pax_corptimizer_whatsnew_2_7_1": "• «Detail by distance» is off by default: the mod no longer coarsens the game's textures (it blurred the clouds and the sea). It can be switched on in ⚙."
 }

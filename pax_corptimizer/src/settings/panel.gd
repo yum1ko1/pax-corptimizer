@@ -5,6 +5,7 @@ const FrameProfiler := preload("res://mods/pax_corptimizer/src/profiler/profiler
 const Feedback := preload("res://mods/pax_corptimizer/src/shared/feedback.gd")
 const LogWindow := preload("res://mods/pax_corptimizer/src/shared/log_window.gd")
 const Upscale := preload("res://mods/pax_corptimizer/src/render/upscale.gd")
+const Lod := preload("res://mods/pax_corptimizer/src/render/lod.gd")
 const DIM := Color(1, 1, 1, 0.62)
 const LAYER_SLOW: Array[int] = [0, 1, 2, 4]
 const FPS_CAPS: Array[int] = [0, 60, 120, 144, 165]
@@ -84,6 +85,7 @@ func _ready() -> void:
 	fps_row.add_child(fps)
 	add_child(fps_row)
 	_upscale_rows()
+	_lod_rows()
 	_threads_rows()
 
 	var cover_v: Variant = mod.get("cover")
@@ -182,6 +184,60 @@ func _ready() -> void:
 
 ## Upscaling: the upscaler (what this computer cannot do is greyed out, DLSS and XeSS among them — not in the engine),
 ## the render scale, FSR's sharpness, the anti-aliasing.
+## «Детали по дальности» (render/lod.gd) and «Значки корпораций по дальности» (map/icons_lod.gd), with what they do now.
+func _lod_rows() -> void:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	var label := Label.new()
+	label.text = mod.tr_key("pax_corptimizer_lod")
+	label.tooltip_text = mod.tr_key("pax_corptimizer_lod_tip")
+	label.mouse_filter = Control.MOUSE_FILTER_PASS
+	row.add_child(label)
+	var opt := OptionButton.new()
+	opt.tooltip_text = mod.tr_key("pax_corptimizer_lod_tip")
+	var cur := str(mod.get_setting("lod2", "off"))
+	for i in Lod.MODES.size():
+		opt.add_item(mod.tr_key("pax_corptimizer_lod_" + str(Lod.MODES[i])), i)
+		if Lod.MODES[i] == cur:
+			opt.select(i)
+	opt.item_selected.connect(func(i: int) -> void: mod.call("set_lod", Lod.MODES[i]))
+	row.add_child(opt)
+	add_child(row)
+	var icons := CheckBox.new()
+	icons.text = mod.tr_key("pax_corptimizer_icons_lod")
+	icons.tooltip_text = mod.tr_key("pax_corptimizer_icons_lod_tip")
+	icons.button_pressed = bool(mod.get_setting("icons_lod", true))
+	icons.toggled.connect(func(on: bool) -> void: mod.call("set_icons_lod", on))
+	add_child(icons)
+	var now := Label.new()
+	now.add_theme_font_size_override("font_size", 12)
+	now.modulate = Color(1, 1, 1, 0.7)
+	now.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	add_child(now)
+	var tick := Timer.new()
+	tick.wait_time = 0.5
+	tick.autostart = true
+	_lod_now = now
+	tick.timeout.connect(_show_lod)
+	add_child(tick)
+
+
+var _lod_now: Label
+
+
+func _show_lod() -> void:
+	if not is_instance_valid(_lod_now) or not _lod_now.is_visible_in_tree():
+		return
+	var l: Variant = mod.get("lod")
+	var ic: Variant = mod.get("icons_lod")
+	var vp := get_viewport()
+	var share := int(round(float((l as Object).get("now_share")) * 100.0)) if l is Object else 0
+	var shown := int((ic as Object).get("shown")) if ic is Object else 0
+	var total := int((ic as Object).get("total")) if ic is Object else 0
+	_lod_now.text = mod.tr_key("pax_corptimizer_lod_now") % [share, vp.texture_mipmap_bias if vp != null else 0.0,
+		vp.mesh_lod_threshold if vp != null else 1.0, shown, total]
+
+
 ## «Многопоточность»: one switch for the mods' heavy work on the processor's other cores, and what runs there.
 func _threads_rows() -> void:
 	var cb := CheckBox.new()

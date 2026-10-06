@@ -25,6 +25,8 @@ const TuningCtl := preload("res://mods/pax_corptimizer/src/settings/tuning_ctl.g
 const Upscale := preload("res://mods/pax_corptimizer/src/render/upscale.gd")
 const LayersCtl := preload("res://mods/pax_corptimizer/src/map/layers_ctl.gd")
 const EnterprisesCtl := preload("res://mods/pax_corptimizer/src/enterprises/enterprises_ctl.gd")
+const Lod := preload("res://mods/pax_corptimizer/src/render/lod.gd")          # details by distance
+const IconsLod := preload("res://mods/pax_corptimizer/src/map/icons_lod.gd")  # the companies' marks by zoom
 const GameRelief := preload("res://mods/pax_corptimizer/src/game/game_relief.gd")
 
 ## Layer checkbox → setting key (checked = shown, like the game's own layers).
@@ -38,6 +40,8 @@ var tuner: MapTuner
 var cover: SkipCover
 var relief: GameRelief               # the game's own work in a frame made lighter (src/game/game_relief.gd)
 var whatsnew: WhatsNew
+var lod: Lod
+var icons_lod: IconsLod
 var _game: PaxGame
 
 
@@ -141,6 +145,16 @@ func set_map_tuning(layer_slow: int, no_3d: bool) -> void:
 
 func set_upscale(mode: String, scale: float, sharpness: float, aa: String) -> void:
 	tuning_ctl.set_upscale(mode, scale, sharpness, aa)
+
+
+func set_lod(mode: String) -> void:
+	set_setting("lod2", mode)   # «lod2»: off by default — the textures are the game's (notes/План.md); an old «normal» is not carried over
+	lod.set_mode(mode)
+
+
+func set_icons_lod(on: bool) -> void:
+	set_setting("icons_lod", on)
+	icons_lod.set_enabled(on)
 
 
 func _process(delta: float) -> void:
